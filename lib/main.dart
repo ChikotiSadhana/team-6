@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
-import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,17 +11,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Jewelry E-commerce',
+      debugShowCheckedModeBanner: false,
+      title: 'Jewelry Store',
       theme: ThemeData(
         primarySwatch: Colors.amber,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.amber,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(),
-        
-      },
+      home: const LoginScreen(),
     );
   }
-}
+} 

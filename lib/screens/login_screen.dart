@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -14,7 +15,7 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                'Welcome to\nJewelry Store',
+                'Welcome to\nJewellery Store',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -28,78 +29,90 @@ class LoginScreen extends StatelessWidget {
                   hintText: 'Email',
                   prefixIcon: const Icon(Icons.email),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   prefixIcon: const Icon(Icons.lock),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber,
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: const Text(
                   'Login',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               const Text(
-                'Or login with',
+                'Or continue with',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.grey),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton.icon(
+                  _buildSocialLoginButton(
+                    icon: Icons.g_mobiledata,
+                    label: 'Google',
                     onPressed: () {},
-                    icon: const Icon(Icons.g_mobiledata),
-                    label: const Text('Google'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
-                      ),
-                    ),
                   ),
-                  ElevatedButton.icon(
+                  const SizedBox(width: 16),
+                  _buildSocialLoginButton(
+                    icon: Icons.facebook,
+                    label: 'Facebook',
                     onPressed: () {},
-                    icon: const Icon(Icons.facebook),
-                    label: const Text('Facebook'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
-                      ),
-                    ),
                   ),
                 ],
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSocialLoginButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+  }) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(label),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(color: Colors.grey),
         ),
       ),
     );
